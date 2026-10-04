@@ -1,0 +1,11 @@
+body {
+    background-color: #f4f9e9;
+}
+ul.ruler {
+    background-color: white;
+    padding: 0 0 .3rem 0;
+}
+ul.ruler > li {
+    font-family: 'Courier New', Courier, monospace;
+    list-style: none;
+}

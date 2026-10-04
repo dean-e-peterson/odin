@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+           "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+
+  <!-- With help from great SVG tutorial at
+       http://tutorials.jenkov.com/svg/index.html -->
+
+  <!-- First define, but don't actually draw, an opacity mask, where
+       white means completely opaque, and black completely transparent.
+       Why?  It is easier to overlap ascender and descender polygons
+       onto a hollow ring than fiddle with arc endpoint coordinates
+       where the ascender/descender joins the ring. -->
+  <defs>
+    <mask id="logo-mask">
+      <!-- Areas outside main diamond shape are transparent. -->
+      <rect x="0" y="0" width="200" height="200"
+            style="fill: black;" />
+
+      <!-- Diamond shape is opaque, with the exceptions below. -->
+      <polygon points="0,100 100,0 200,100 100,200"
+               style="fill: white;" />
+
+      <!-- Stylized letters d and p are transparent. -->
+      <g style="fill: black; fill-rule: evenodd;">
+        <!-- Use path arcs to make hollow circles.  This was finished
+             and working before I started using masks, so I left it. -->
+        <path d="M100,100
+                 a35,35 0 0,1 -70,0
+                 a35,35 0 0,1 70,0
+                 m-15,0
+                 a20,20 0 0,1 -40,0
+                 a20,20 0 0,1 40,0" />
+        <path d="M100,100
+                 a35,35 0 0,1 70,0
+                 a35,35 0 0,1 -70,0
+                 m15,0
+                 a20,20 0 0,1 40,0
+                 a20,20 0 0,1 -40,0" />
+        <!-- The ascender and descender of the d and p. -->
+        <path d="M100,100
+                 l0,-100
+                 l-15,0
+                 l0,100
+                 Z" />
+        <path d="M100,100
+                 l0,100
+                 l15,0
+                 l0,-100
+                 Z" />
+      </g>
+    </mask>
+  </defs>
+
+  <!-- Allows setting an overall background color. -->
+  <rect width="100%" height="100%" style="fill: #f4f9e9;" />
+
+
+  <!-- Uncomment polygon below to give letters an opaque white background.
+       This additional diamond, unmasked, is here to allow you to
+       force a white background beneath the letters in case that
+       becomes necessary, without removing the masking machinery
+       which allows transparent letters.
+       Note: This is shrunken from the other diamonds by 1 pixel
+       to prevent a fine white border around the entire main diamond. 
+  <polygon points="1,100 100,1 199,100 100,199"
+           style="fill: white;" />
+    -->
+
+  <!-- Finally, draw an actual diamond shape in the color we want
+       the logo to be, but masked out so that the stylized letters
+       show through. -->
+  <polygon points="0,100 100,0 200,100 100,200"
+           style="fill: #2b4162;
+                  mask: url(#logo-mask);" />
+
+</svg>
+
