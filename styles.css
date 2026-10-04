@@ -11,12 +11,14 @@ body {
     background-color: var(--bg);
 }
 /* input, */
+.pane,
 ul.ruler {
     background-color: white;
     border-style: solid;
     border-width: 1px;
     border-color: var(--fg-lighter);
     border-radius: 4px;
+    padding: .3rem;
 }
 /*
 input:hover {
@@ -26,10 +28,15 @@ input:focus {
     border-width: 0;
 }
 */
-ul.ruler {
-    padding: .3rem;
-}
 ul.ruler > li {
     font-family: 'Courier New', Courier, monospace;
     list-style: none;
+}
+.panes {
+    display: flex;
+    flex-direction: row;
+    gap: .3rem;
+}
+.pane {
+    flex: 1;
 }
