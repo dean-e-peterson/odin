@@ -1,9 +1,33 @@
-body {
-    background-color: #f4f9e9;
+:root {
+    --accent:      #c05746; /* Cedar Chest */
+    --bg:          #f4f9e9; /* Isabelline */
+    --bg-darker:   #eef5db; /* Beige */
+    --fg:          #2b4162; /* Deep Koamaru */
+    --fg-lighter:  #385f71; /* Deep Space Sparkle */
+    --fg-lightest: #75b9be; /* Moonstone Blue */
 }
+
+body {
+    background-color: var(--bg);
+}
+/* input, */
 ul.ruler {
     background-color: white;
-    padding: 0 0 .3rem 0;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--fg-lighter);
+    border-radius: 4px;
+}
+/*
+input:hover {
+    border-color: var(--fg-lightest);
+}
+input:focus {
+    border-width: 0;
+}
+*/
+ul.ruler {
+    padding: .3rem;
 }
 ul.ruler > li {
     font-family: 'Courier New', Courier, monospace;
