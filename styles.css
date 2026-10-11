@@ -9,6 +9,12 @@
 
 body {
     background-color: var(--bg);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+header {
+    display: flex;
+    color: var(--fg);
+    gap: 8px;
 }
 /* input, */
 .pane,
@@ -30,6 +36,8 @@ input:focus {
 */
 ul.ruler > li {
     font-family: 'Courier New', Courier, monospace;
+    /* font-size: 1.1rem; */
+    font-weight: bold;
     list-style: none;
 }
 .panes {
