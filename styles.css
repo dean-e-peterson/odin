@@ -48,3 +48,6 @@ ul.ruler > li {
 .pane {
     flex: 1;
 }
+footer {
+    margin-top: 1rem;
+}
