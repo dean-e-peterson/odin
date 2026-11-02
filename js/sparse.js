@@ -2,7 +2,9 @@
 
 function generate()
 {
-    const sparseCombos = [[0, 1, 3], [0, 2, 3]];
+    //const sparseCombos = [[0, 1, 3], [0, 2, 3]];
+    const sparseBitCombos = [1 + 2 + 8, 1 + 4 + 8];
+    const sparseCombos = bitCombosToCombos(sparseBitCombos);
     const ulCombos = document.getElementById("combos");
     ulCombos.innerHTML = "";
     insertCombos(ulCombos, sparseCombos);
@@ -37,6 +39,33 @@ function comboToString(combo)
     return result;
 }
 
+function bitCombosToCombos(bitCombos)
+{
+    let results = [];
+    for (const bitCombo of bitCombos)
+    {
+        results.push(bitComboToCombo(bitCombo))
+    }
+    return results;
+}
+
+// Convert an integer bitwise combo with the one bits representing the values in the combo to an array.
+function bitComboToCombo(bitCombo)
+{
+    let results = [];
+    let value = 0
+    while (bitCombo > 0)
+    {
+        if (bitCombo & 1 > 0)
+        {
+            results.push(value);
+        }
+        bitCombo = bitCombo >>> 1;
+        value++;
+    }
+    return results;
+}
+
 // https://stackoverflow.com/a/5450113/8491301
 function repeat(pattern, count) {
     if (count < 1) return '';
@@ -47,3 +76,11 @@ function repeat(pattern, count) {
     }
     return result + pattern;
 }
+
+// function next(n) {
+//     let lowestBit   = n & -n
+//     let leftBits    = n + lowestBit
+//     let changedBits = n ^ leftBits
+//     let rightBits   = (changedBits / lowestBit) >>> 2
+//     return (leftBits | rightBits)
+// }
