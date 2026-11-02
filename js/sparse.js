@@ -2,15 +2,19 @@
 
 function generate()
 {
+    const length = document.getElementById("length").value;
     //const sparseCombos = [[0, 1, 3], [0, 2, 3]];
-    const sparseBitCombos = [1 + 2 + 8, 1 + 4 + 8];
-    const sparseCombos = bitCombosToCombos(sparseBitCombos);
+    //const sparseBitCombos = [1 + 2 + 8, 1 + 4 + 8];
+    //const sparseCombos = bitCombosToCombos(sparseBitCombos);
+
+    const bitCombos = generateBitCombos(length, 3);
+    const combos = bitCombosToCombos(bitCombos);
     const ulCombos = document.getElementById("combos");
     ulCombos.innerHTML = "";
-    insertCombos(ulCombos, sparseCombos);
+    insertCombos(ulCombos, length, combos);
 }
 
-function insertCombos(ul, combos)
+function insertCombos(ul, length, combos)
 {
     const liNumber = document.createElement("li");
     const liRulers = document.createElement("li");
@@ -21,21 +25,33 @@ function insertCombos(ul, combos)
     for (const combo of combos)
     {
         const li = document.createElement("li");
-        li.innerHTML = comboToString(combo);
+        li.innerHTML = comboToString(length, combo).replace(/ /, "&nbsp;");
         ul.append(li)
     }
 }
 
+// function comboToString(length, combo)
+// {
+//     let result = repeat(" ", length);
+//     for (const value of combo)
+//     {
+//         result[value] = ".";
+//     }
+//     return result;
+// }
+
 // Assumes combo is in increasing order.
-function comboToString(combo)
+function comboToString(length, combo)
 {
     let result = "";
-    for (const value of combo)
+    let value = 0;
+    for (let i = 0; i < combo.length; i++)
     {
-        if (value > result.length)
-            result += repeat(" ", value - result.length);
+        value = combo[i];
+        result += repeat(" ", value - result.length);
         result += ".";
     }
+    result += repeat(" ", length - value);
     return result;
 }
 
@@ -77,10 +93,23 @@ function repeat(pattern, count) {
     return result + pattern;
 }
 
-// function next(n) {
-//     let lowestBit   = n & -n
-//     let leftBits    = n + lowestBit
-//     let changedBits = n ^ leftBits
-//     let rightBits   = (changedBits / lowestBit) >>> 2
-//     return (leftBits | rightBits)
-// }
+function* generateBitCombos(length, onesCount)
+{
+    let bitCombo = (1 << onesCount) - 1;
+    const overflow = 1 << length;
+    while (bitCombo < overflow)
+    {
+        yield bitCombo;
+        bitCombo = next(bitCombo);
+    }
+}
+
+// Return next integer with same number of one bits using Gosper's hack
+// https://iamkate.com/code/hakmem-item-175/
+function next(n) {
+    let lowestBit   = n & -n
+    let leftBits    = n + lowestBit
+    let changedBits = n ^ leftBits
+    let rightBits   = (changedBits / lowestBit) >>> 2
+    return (leftBits | rightBits)
+}
