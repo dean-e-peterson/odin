@@ -2,12 +2,14 @@
 
 function generate()
 {
-    const length = document.getElementById("length").value;
+    const length = parseInt(document.getElementById("length").value);
+    const ones = parseInt(document.getElementById("ones").value);
     //const sparseCombos = [[0, 1, 3], [0, 2, 3]];
     //const sparseBitCombos = [1 + 2 + 8, 1 + 4 + 8];
     //const sparseCombos = bitCombosToCombos(sparseBitCombos);
 
-    const bitCombos = generateBitCombos(length, 3);
+    //const bitCombos = generateBitCombos(length, ones);
+    const bitCombos = generateCompleteBitCombos(length, ones);
     const combos = bitCombosToCombos(bitCombos);
     const ulCombos = document.getElementById("combos");
     ulCombos.innerHTML = "";
@@ -18,8 +20,8 @@ function insertCombos(ul, length, combos)
 {
     const liNumber = document.createElement("li");
     const liRulers = document.createElement("li");
-    liNumber.innerHTML = "0    5   10   15   20".replaceAll(" ", "&nbsp;");
-    liRulers.innerHTML = "|    |    |    |    |".replaceAll(" ", "&nbsp;");
+    liNumber.innerHTML = "0    5   10   15   20   25   30".replaceAll(" ", "&nbsp;");
+    liRulers.innerHTML = "|    |    |    |    |    |    |".replaceAll(" ", "'");
     ul.append(liNumber);
     ul.append(liRulers);
     for (const combo of combos)
@@ -86,20 +88,48 @@ function bitComboToCombo(bitCombo)
 function repeat(pattern, count) {
     if (count < 1) return '';
     var result = '';
-    while (count > 1) {
+    while (count > 1)
+    {
         if (count & 1) result += pattern;
         count >>= 1, pattern += pattern;
     }
     return result + pattern;
 }
 
+function* generateCompleteBitCombos(length, onesCount)
+{
+    const gen = generateBitCombos(length, onesCount);
+    let genNext = gen.next();
+    while (!genNext.done)
+    {
+        if (isCompleteBitCombo(length, genNext.value))
+        {
+            yield genNext.value
+        }
+        genNext = gen.next();
+    }
+}
+
+function isCompleteBitCombo(length, bitCombo)
+{
+    let result = true
+    for (let i = 1; i <= length; i++)
+    {
+        result = result && ((bitCombo & (bitCombo << i)) > 0);
+        // console.log(`result: ${result}, bitCombo: ${bitCombo}, bitCombo << ${i}: ${bitCombo << i}`);
+    }
+    return result;
+}
+
 function* generateBitCombos(length, onesCount)
 {
     let bitCombo = (1 << onesCount) - 1;
-    const overflow = 1 << length;
+    const overflow = 1 << (length + 1);
+    //console.log(`overflow: ${overflow}`);
     while (bitCombo < overflow)
     {
         yield bitCombo;
+        //console.log(`bitCombo: ${bitCombo}`);
         bitCombo = next(bitCombo);
     }
 }
