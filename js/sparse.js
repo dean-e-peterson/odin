@@ -18,14 +18,14 @@ function insertCombos(ul, length, combos)
 {
     const liNumber = document.createElement("li");
     const liRulers = document.createElement("li");
-    liNumber.innerHTML = "0&nbsp;&nbsp;&nbsp;&nbsp;5";
-    liRulers.innerHTML = "|&nbsp;&nbsp;&nbsp;&nbsp;|";
+    liNumber.innerHTML = "0    5   10   15   20".replaceAll(" ", "&nbsp;");
+    liRulers.innerHTML = "|    |    |    |    |".replaceAll(" ", "&nbsp;");
     ul.append(liNumber);
     ul.append(liRulers);
     for (const combo of combos)
     {
         const li = document.createElement("li");
-        li.innerHTML = comboToString(length, combo).replace(/ /, "&nbsp;");
+        li.innerHTML = comboToString(length, combo).replaceAll(" ", "&nbsp;");
         ul.append(li)
     }
 }
