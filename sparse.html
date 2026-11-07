@@ -18,7 +18,7 @@
     <label for="length">Length:</label>
     <input id="length" value="6">
     <label for="ones">Tick Count:</label>
-    <input id="ones" value="5">
+    <input id="ones" value="4">
     <button id="generate" onclick="generate()">Generate</button>
     <ul class="ruler" id="combos">
       <li>&nbsp;</li>
@@ -32,6 +32,8 @@
   <footer>
     Copyright &copy; Dean Peterson
   </footer>
+  <!-- Not using ES6 modules to preserve local file loading ability. -->
   <script src="js/sparse.js"></script>
+  <script src="js/Combo.js"></script>
 </body>
 </html>

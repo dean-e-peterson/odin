@@ -10,7 +10,9 @@ function generate()
 
     //const bitCombos = generateBitCombos(length, ones);
     const bitCombos = generateCompleteBitCombos(length, ones);
-    const combos = bitCombosToCombos(bitCombos);
+    //const combos = bitCombosToCombos(bitCombos);
+    //const combos = bitCombos.map((b) => { new Combo(b) });
+    const combos = bitCombos;
     const ulCombos = document.getElementById("combos");
     ulCombos.innerHTML = "";
     insertCombos(ulCombos, length, combos);
@@ -27,7 +29,9 @@ function insertCombos(ul, length, combos)
     for (const combo of combos)
     {
         const li = document.createElement("li");
-        li.innerHTML = comboToString(length, combo).replaceAll(" ", "&nbsp;");
+        //li.innerHTML = comboToString(length, combo).replaceAll(" ", "&nbsp;");
+        const comboObj = new Combo(combo);
+        li.innerHTML = comboObj.toString(length).replaceAll(" ", "&nbsp;");
         ul.append(li)
     }
 }
@@ -84,17 +88,17 @@ function bitComboToCombo(bitCombo)
     return results;
 }
 
-// https://stackoverflow.com/a/5450113/8491301
-function repeat(pattern, count) {
-    if (count < 1) return '';
-    var result = '';
-    while (count > 1)
-    {
-        if (count & 1) result += pattern;
-        count >>= 1, pattern += pattern;
-    }
-    return result + pattern;
-}
+// // https://stackoverflow.com/a/5450113/8491301
+// function repeat(pattern, count) {
+//     if (count < 1) return '';
+//     var result = '';
+//     while (count > 1)
+//     {
+//         if (count & 1) result += pattern;
+//         count >>= 1, pattern += pattern;
+//     }
+//     return result + pattern;
+// }
 
 function* generateCompleteBitCombos(length, onesCount)
 {
