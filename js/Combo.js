@@ -1,25 +1,13 @@
 // Class to hold a combination of numbers which can represent 
 // the locations of tick marks on a ruler.
 
-function Combo(bits) {
-    if (!new.target)
+class Combo {
+    constructor(bits)
     {
-        throw Error("You must use the 'new' operator to call a constructor.");
+        this.bits = bits;
     }
 
-    this.bits = bits;
-
-    // this.isComplete = function(length) {
-    //     let result = true
-    //     for (let i = 1; i <= length; i++)
-    //     {
-    //         result = result && ((this.bits & (this.bits << i)) > 0);
-    //         // console.log(`result: ${result}, this.bits: ${this.bits}, this.bits << ${i}: ${this.bits << i}`);
-    //     }
-    //     return result;
-    // }
-
-    this.toArray = function() {
+    toArray() {
         let bits = this.bits;
         let results = [];
         let value = 0
@@ -35,7 +23,7 @@ function Combo(bits) {
         return results;
     }
 
-    this.toString = function(length)
+    toString(length)
     {
         let result = "";
         let value = 0;
