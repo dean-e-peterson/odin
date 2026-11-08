@@ -13,7 +13,7 @@ class ComboInt {
         let value = 0
         while (bits > 0)
         {
-            if (bits & 1 > 0)
+            if ((bits & 1) > 0)
             {
                 results.push(value);
             }
