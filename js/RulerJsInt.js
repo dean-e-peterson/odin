@@ -45,7 +45,7 @@ class RulerJsInt {
         while (bitCombo < overflow)
         {
             yield bitCombo;
-            bitCombo = next(bitCombo);
+            bitCombo = this.next(bitCombo);
         }
     }
 
