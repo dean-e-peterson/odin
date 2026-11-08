@@ -22,8 +22,8 @@ function insertCombos(ul, length, combos)
 {
     const liNumber = document.createElement("li");
     const liRulers = document.createElement("li");
-    liNumber.innerHTML = "0    5   10   15   20   25   30   35   40".replaceAll(" ", "&nbsp;");
-    liRulers.innerHTML = "|    |    |    |    |    |    |    |    |".replaceAll(" ", "'");
+    liNumber.innerHTML = "0    5   10   15   20   25   30   35   40   45   50".replaceAll(" ", "&nbsp;");
+    liRulers.innerHTML = "|    |    |    |    |    |    |    |    |    |    |".replaceAll(" ", "'");
     ul.append(liNumber);
     ul.append(liRulers);
     let count = 0;
