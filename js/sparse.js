@@ -5,13 +5,13 @@ function generate()
     const length = parseInt(document.getElementById("length").value);
     const ones = parseInt(document.getElementById("ones").value);
 
-    const bitCombos = generateCompleteBitCombos(length, ones);
+    const combos = generateCompleteCombos(length, ones);
     const ulCombos = document.getElementById("combos");
     ulCombos.innerHTML = "";
-    insertCombos(ulCombos, length, bitCombos);
+    insertCombos(ulCombos, length, combos);
 }
 
-function insertCombos(ul, length, bitCombos)
+function insertCombos(ul, length, combos)
 {
     const liNumber = document.createElement("li");
     const liRulers = document.createElement("li");
@@ -19,16 +19,19 @@ function insertCombos(ul, length, bitCombos)
     liRulers.innerHTML = "|    |    |    |    |    |    |".replaceAll(" ", "'");
     ul.append(liNumber);
     ul.append(liRulers);
-    for (const bitCombo of bitCombos)
+    for (const combo of combos)
     {
-        // Defer converting bits to an object until here after we've already
-        // narrowed down the list to complete ones for performance.
-        const combo = new Combo(bitCombo);
-
         const li = document.createElement("li");
         li.innerHTML = combo.toString(length).replaceAll(" ", "&nbsp;");
         ul.append(li)
     }
+}
+
+// Defer converting bits to an object until here after we've already
+// narrowed down the list to complete ones for performance.
+function* generateCompleteCombos(length, onesCount)
+{
+    yield* generateCompleteBitCombos(length, onesCount).map(b => new Combo(b));
 }
 
 function* generateCompleteBitCombos(length, onesCount)
@@ -63,7 +66,7 @@ function* generateBitCombos(length, onesCount)
     while (bitCombo < overflow)
     {
         yield bitCombo;
-         bitCombo = next(bitCombo);
+        bitCombo = next(bitCombo);
     }
 }
 
