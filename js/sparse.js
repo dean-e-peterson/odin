@@ -9,7 +9,13 @@ function generate()
     const combos = rulerJsInt.generateCompleteCombos();
     const ulCombos = document.getElementById("combos");
     ulCombos.innerHTML = "";
-    insertCombos(ulCombos, length, combos);
+
+    const startTimeMs = Date.now();
+    const comboCount = insertCombos(ulCombos, length, combos);
+    const elapsedTimeMs = Date.now() - startTimeMs;
+
+    const divStatus1 = document.getElementById("status1");
+    divStatus1.innerText = `Returned ${comboCount} rulers in ${elapsedTimeMs / 1000} seconds.`;
 }
 
 function insertCombos(ul, length, combos)
@@ -20,10 +26,13 @@ function insertCombos(ul, length, combos)
     liRulers.innerHTML = "|    |    |    |    |    |    |    |    |".replaceAll(" ", "'");
     ul.append(liNumber);
     ul.append(liRulers);
+    let count = 0;
     for (const combo of combos)
     {
+        count++;
         const li = document.createElement("li");
         li.innerHTML = combo.toString(length).replaceAll(" ", "&nbsp;");
         ul.append(li)
     }
+    return count;
 }

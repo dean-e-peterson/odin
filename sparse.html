@@ -20,22 +20,24 @@
     <label for="ones">Tick Count:</label>
     <input id="ones" value="8">
     <button id="generate" onclick="generate()">Generate</button>
+    <div class="panes">
+      <div class="pane" id="status1">Status 1</div>
+      <div class="pane" id="status2">Status 2</div>
+      <div class="pane" id="status3">Status 3</div>
+    </div>
     <ul class="ruler" id="combos">
       <li>&nbsp;</li>
     </ul>
-    <div class="panes">
-      <div class="pane">Status 1</div>
-      <div class="pane">Status 2</div>
-      <div class="pane">Status 3</div>
-    </div>
   </article>
   <footer>
     Copyright &copy; Dean Peterson
   </footer>
   <!-- Not using ES6 modules to preserve local file loading ability. -->
   <script src="js/sparse.js"></script>
-  <script src="js/ComboInt.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/RulerJsInt.js"></script>
+  <script src="js/ComboInt.js"></script>
+  <script src="js/RulerJsBigInt.js"></script>
+  <script src="js/ComboBigInt.js"></script>
 </body>
 </html>

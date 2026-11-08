@@ -44,6 +44,8 @@ ul.ruler > li {
     display: flex;
     flex-direction: row;
     gap: .3rem;
+    font-size: 0.8rem;
+    margin-top: 1rem;
 }
 .pane {
     flex: 1;
