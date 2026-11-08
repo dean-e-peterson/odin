@@ -15,6 +15,11 @@
   </header>
   <article>
     <p>Here is a page to generate (maximal?) complete <a href="https://en.wikipedia.org/wiki/Sparse_ruler">sparse rulers</a>.</p>
+    <label for="implementation">Implementation:</label>
+    <select id="implementation">
+      <option value="RulerJsInt">JavaScript</option>
+      <option value="RulerJsBigInt" selected>JavaScript using BigInt</option>
+    </select>
     <label for="length">Length:</label>
     <input id="length" value="23">
     <label for="ones">Tick Count:</label>

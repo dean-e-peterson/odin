@@ -2,11 +2,8 @@
 
 function generate()
 {
-    const length = parseInt(document.getElementById("length").value);
-    const ones = parseInt(document.getElementById("ones").value);
-
-    const rulerJsInt = new RulerJsBigInt(length, ones);
-    const combos = rulerJsInt.generateCompleteCombos();
+    const rulerImplementation = getImplementation();
+    const combos = rulerImplementation.generateCompleteCombos();
     const ulCombos = document.getElementById("combos");
     ulCombos.innerHTML = "";
 
@@ -16,6 +13,20 @@ function generate()
 
     const divStatus1 = document.getElementById("status1");
     divStatus1.innerText = `Returned ${comboCount} rulers in ${elapsedTimeMs / 1000} seconds.`;
+}
+
+function getImplementation()
+{
+    const length = parseInt(document.getElementById("length").value);
+    const ones = parseInt(document.getElementById("ones").value);
+    const selectedImplementation = document.getElementById("implementation").value;
+    switch (selectedImplementation)
+    {
+        case "RulerJsInt":
+            return new RulerJsInt(length, ones);
+        case "RulerJsBigInt":
+            return new RulerJsBigInt(length, ones);
+    }
 }
 
 function insertCombos(ul, length, combos)
