@@ -15,7 +15,7 @@ class RulerJsBigInt {
 
     * generateCompleteBitCombos()
     {
-        const gen = this.generateBitCombos();
+        const gen = this.generateEndedBitCombos();
         let genNext = gen.next();
         while (!genNext.done)
         {
@@ -38,10 +38,28 @@ class RulerJsBigInt {
         return result;
     }
 
-    * generateBitCombos()
+    // Generate only combos that have ones on each end.
+    * generateEndedBitCombos()
     {
-        let bitCombo = (1n << BigInt(this.tickCount)) - 1n;
-        const overflow = 1n << (BigInt(this.length) + 1n);
+        // This generates fewer combos for performance by attaching the ends to slightly smaller combos.
+        yield* this.generateBitCombos(this.length - 2, this.tickCount - 2).map(b => this.attachEnds(b));
+    }
+
+    // Attach ones on both ends of a bit combo.
+    attachEnds(bitCombo)
+    {
+        let result = 1n; // Attach lower end.
+        result = result | (bitCombo << 1n); // Insert middle.
+        result = result | (1n << (BigInt(this.length))) // Attach high end.
+        // console.log("attachEnds: " + result + " from " + bitCombo + ": " + (new ComboBigInt(result)).toString());
+        return result;
+    }
+
+    // Generate combinations, including those with no ones, no tick marks, at either end.
+    * generateBitCombos(innerLength, innerTickCount)
+    {
+        let bitCombo = (1n << BigInt(innerTickCount)) - 1n;
+        const overflow = 1n << (BigInt(innerLength) + 1n);
         while (bitCombo < overflow)
         {
             yield bitCombo;
