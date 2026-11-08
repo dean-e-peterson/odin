@@ -1,4 +1,4 @@
-"use strict"; // Remove if this becomes/is loaded as a module.
+"use strict"; // Remove if this becomes an ES6 module.
 
 function generate()
 {
