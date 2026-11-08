@@ -5,7 +5,8 @@ function generate()
     const length = parseInt(document.getElementById("length").value);
     const ones = parseInt(document.getElementById("ones").value);
 
-    const combos = generateCompleteCombos(length, ones);
+    const rulerJsInt = new RulerJsInt(length, ones);
+    const combos = rulerJsInt.generateCompleteCombos();
     const ulCombos = document.getElementById("combos");
     ulCombos.innerHTML = "";
     insertCombos(ulCombos, length, combos);
