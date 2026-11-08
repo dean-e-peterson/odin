@@ -18,14 +18,14 @@ function generate()
 function getImplementation()
 {
     const length = parseInt(document.getElementById("length").value);
-    const ones = parseInt(document.getElementById("ones").value);
+    const tickCount = parseInt(document.getElementById("tickCount").value);
     const selectedImplementation = document.getElementById("implementation").value;
     switch (selectedImplementation)
     {
         case "RulerJsInt":
-            return new RulerJsInt(length, ones);
+            return new RulerJsInt(length, tickCount);
         case "RulerJsBigInt":
-            return new RulerJsBigInt(length, ones);
+            return new RulerJsBigInt(length, tickCount);
     }
 }
 
