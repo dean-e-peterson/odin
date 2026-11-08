@@ -1,7 +1,7 @@
 // Class to hold a combination of numbers which can represent 
-// the locations of tick marks on a ruler.
+// the locations of tick marks on a ruler with normal JavaScript Number.
 
-class Combo {
+class ComboInt {
     constructor(bits)
     {
         this.bits = bits;

@@ -10,7 +10,7 @@ class RulerJsInt {
     // narrowed down the list to complete ones for performance.
     * generateCompleteCombos()
     {
-        yield* this.generateCompleteBitCombos().map(b => new Combo(b));
+        yield* this.generateCompleteBitCombos().map(b => new ComboInt(b));
     }
 
     * generateCompleteBitCombos()
