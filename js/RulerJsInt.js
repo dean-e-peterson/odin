@@ -10,16 +10,16 @@ class RulerJsInt {
     // narrowed down the list to complete ones for performance.
     * generateCompleteCombos()
     {
-        yield* generateCompleteBitCombos().map(b => new Combo(b));
+        yield* this.generateCompleteBitCombos().map(b => new Combo(b));
     }
 
     * generateCompleteBitCombos()
     {
-        const gen = generateBitCombos();
+        const gen = this.generateBitCombos();
         let genNext = gen.next();
         while (!genNext.done)
         {
-            if (isCompleteBitCombo(genNext.value))
+            if (this.isCompleteBitCombo(genNext.value))
             {
                 yield genNext.value
             }
@@ -58,4 +58,5 @@ class RulerJsInt {
         let rightBits   = (changedBits / lowestBit) >>> 2
         return (leftBits | rightBits)
     }
+
 }
