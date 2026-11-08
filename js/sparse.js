@@ -4,13 +4,8 @@ function generate()
 {
     const length = parseInt(document.getElementById("length").value);
     const ones = parseInt(document.getElementById("ones").value);
-    //const sparseCombos = [[0, 1, 3], [0, 2, 3]];
-    //const sparseBitCombos = [1 + 2 + 8, 1 + 4 + 8];
-    //const sparseCombos = bitCombosToCombos(sparseBitCombos);
 
-    //const bitCombos = generateBitCombos(length, ones);
     const bitCombos = generateCompleteBitCombos(length, ones);
-    //const combos = bitCombosToCombos(bitCombos);
     //const combos = bitCombos.map((b) => { new Combo(b) });
     const combos = bitCombos;
     const ulCombos = document.getElementById("combos");
@@ -35,70 +30,6 @@ function insertCombos(ul, length, combos)
         ul.append(li)
     }
 }
-
-// function comboToString(length, combo)
-// {
-//     let result = repeat(" ", length);
-//     for (const value of combo)
-//     {
-//         result[value] = ".";
-//     }
-//     return result;
-// }
-
-// Assumes combo is in increasing order.
-function comboToString(length, combo)
-{
-    let result = "";
-    let value = 0;
-    for (let i = 0; i < combo.length; i++)
-    {
-        value = combo[i];
-        result += repeat(" ", value - result.length);
-        result += ".";
-    }
-    result += repeat(" ", length - value);
-    return result;
-}
-
-function bitCombosToCombos(bitCombos)
-{
-    let results = [];
-    for (const bitCombo of bitCombos)
-    {
-        results.push(bitComboToCombo(bitCombo))
-    }
-    return results;
-}
-
-// Convert an integer bitwise combo with the one bits representing the values in the combo to an array.
-function bitComboToCombo(bitCombo)
-{
-    let results = [];
-    let value = 0
-    while (bitCombo > 0)
-    {
-        if (bitCombo & 1 > 0)
-        {
-            results.push(value);
-        }
-        bitCombo = bitCombo >>> 1;
-        value++;
-    }
-    return results;
-}
-
-// // https://stackoverflow.com/a/5450113/8491301
-// function repeat(pattern, count) {
-//     if (count < 1) return '';
-//     var result = '';
-//     while (count > 1)
-//     {
-//         if (count & 1) result += pattern;
-//         count >>= 1, pattern += pattern;
-//     }
-//     return result + pattern;
-// }
 
 function* generateCompleteBitCombos(length, onesCount)
 {
